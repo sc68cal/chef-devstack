@@ -13,5 +13,3 @@ default[:devstack][:flat_interface] = "eth0"
 default[:devstack][:public_interface] = "eth0"
 default[:devstack][:fixed_range] = "10.0.0.0/24"
 default[:devstack][:floating_range] = "172.24.4.224/28"
-default[:devstack][:my_ip] = ipaddress
-default[:devstack][:hostname] = "devstack"
