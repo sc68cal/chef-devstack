@@ -28,7 +28,7 @@ execute "git clone #{node[:devstack][:repository]}" do
   not_if { File.directory?("#{node[:devstack][:dir]}/devstack") }
 end
 
-execute "git checkout #{node[:devstack][:branch]}" do
+execute "git checkout -f #{node[:devstack][:branch]}" do
   cwd "#{node[:devstack][:dir]}/devstack"
   user node[:devstack][:user]
   group node[:devstack][:group]
