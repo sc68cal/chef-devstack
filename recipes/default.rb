@@ -41,6 +41,13 @@ template "#{node[:devstack][:dir]}/devstack/localrc" do
   mode 0644
 end
 
+template "#{node[:devstack][:dir]}/devstack/local.conf" do
+  source "local.conf.erb"
+  owner node[:devstack][:user]
+  group node[:devstack][:group]
+  mode 0644
+end
+
 execute "killall screen || true"
 
 execute "su -c 'set -e; cd #{node[:devstack][:dir]}/devstack; RECLONE=yes bash stack.sh > devstack.log' #{node[:devstack][:user]}"
