@@ -51,3 +51,5 @@ end
 execute "killall screen || true"
 
 execute "su -c 'set -e; cd #{node[:devstack][:dir]}/devstack; RECLONE=yes bash stack.sh > devstack.log' #{node[:devstack][:user]}"
+
+execute "sudo ovs-vsctl add-port br-ex eth2"
