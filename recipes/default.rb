@@ -50,6 +50,10 @@ end
 
 execute "killall screen || true"
 
+eth2_ip = "#{node[:devstack][:floating_range].slice(0..-6)}.2/24"
+
+execute "sudo ip addr del #{eth2_ip} dev #{node[:devstack][:public_interface]}"
+
 execute "su -c 'set -e; cd #{node[:devstack][:dir]}/devstack; RECLONE=yes bash stack.sh > devstack.log' #{node[:devstack][:user]}"
 
 execute "sudo ovs-vsctl add-port br-ex eth2"
