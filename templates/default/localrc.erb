@@ -10,4 +10,5 @@ FLAT_INTERFACE=<%= node[:devstack][:flat_interface] %>
 PUBLIC_INTERFACE=<%= node[:devstack][:public_interface] %>
 FIXED_RANGE=<%= node[:devstack][:fixed_range] %>
 FLOATING_RANGE=<%= node[:devstack][:floating_range] %>
+PUBLIC_NETWORK_GATEWAY=<%= node[:devstack][:gateway_ip] %>
 <%= node[:devstack][:localrc] %>
