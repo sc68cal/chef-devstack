@@ -56,7 +56,7 @@ execute "su -c 'set -e; cd #{node[:devstack][:dir]}/devstack; RECLONE=yes bash s
 
 execute "add #{node[:devstack][:public_interface]} to bridge" do
   command "sudo ovs-vsctl add-port br-ex #{node[:devstack][:public_interface]}"
-  not_if do "sudo /usr/sbin/ovs-vsctl list-ports br-ex | /usr/bin/grep #{node[:devstack][:public_interface]}" end
+  not_if do "sudo ovs-vsctl list-ports br-ex | grep #{node[:devstack][:public_interface]}" end
 end
 
 execute "sudo ip addr del #{eth2_ip} dev #{node[:devstack][:public_interface]}"
