@@ -1,4 +1,3 @@
-<%= node[:devstack][:localconf] %>
 [[local|localrc]]
 SHELL_AFTER_RUN=no
 MYSQL_PASSWORD=<%= node[:devstack][:mysql_password] %>
@@ -21,4 +20,4 @@ enable_service q-dhcp
 enable_service q-meta
 enable_service q-l3
 
-<%= node[:devstack][:localrc] %>
+<%= node[:devstack][:localconf] %>
