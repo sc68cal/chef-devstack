@@ -34,13 +34,6 @@ execute "git checkout #{node[:devstack][:branch]}" do
   group node[:devstack][:group]
 end
 
-template "#{node[:devstack][:dir]}/devstack/localrc" do
-  source "localrc.erb"
-  owner node[:devstack][:user]
-  group node[:devstack][:group]
-  mode 0644
-end
-
 template "#{node[:devstack][:dir]}/devstack/local.conf" do
   source "local.conf.erb"
   owner node[:devstack][:user]

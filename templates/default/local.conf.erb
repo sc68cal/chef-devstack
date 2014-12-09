@@ -1,1 +1,24 @@
 <%= node[:devstack][:localconf] %>
+[[local|localrc]]
+SHELL_AFTER_RUN=no
+MYSQL_PASSWORD=<%= node[:devstack][:mysql_password] %>
+RABBIT_PASSWORD=<%= node[:devstack][:rabbit_password] %>
+ADMIN_PASSWORD=<%= node[:devstack][:admin_password] %>
+SERVICE_PASSWORD=<%= node[:devstack][:service_password] %>
+SERVICE_TOKEN=<%= node[:devstack][:service_token] %>
+HOST_IP=<%= node[:devstack][:host_ip] %>
+INSTANCES_PATH=<%= node[:devstack][:instances_path] %>
+FLAT_INTERFACE=<%= node[:devstack][:flat_interface] %>
+PUBLIC_INTERFACE=<%= node[:devstack][:public_interface] %>
+FIXED_RANGE=<%= node[:devstack][:fixed_range] %>
+FLOATING_RANGE=<%= node[:devstack][:floating_range] %>
+PUBLIC_NETWORK_GATEWAY=<%= node[:devstack][:gateway_ip] %>
+
+disable_service n-net
+enable_service q-svc
+enable_service q-agt
+enable_service q-dhcp
+enable_service q-meta
+enable_service q-l3
+
+<%= node[:devstack][:localrc] %>
