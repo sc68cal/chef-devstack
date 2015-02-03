@@ -1,4 +1,7 @@
 [[local|localrc]]
+SERVICE_HOST=<%= node[:devstack][:service_host] %>
+MYSQL_HOST=<%= node[:devstack][:service_host] %>
+RABBIT_HOST=<%= node[:devstack][:service_host] %>
 SHELL_AFTER_RUN=no
 MYSQL_PASSWORD=<%= node[:devstack][:mysql_password] %>
 RABBIT_PASSWORD=<%= node[:devstack][:rabbit_password] %>
