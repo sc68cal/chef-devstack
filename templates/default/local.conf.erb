@@ -13,11 +13,12 @@ FIXED_RANGE=<%= node[:devstack][:fixed_range] %>
 FLOATING_RANGE=<%= node[:devstack][:floating_range] %>
 PUBLIC_NETWORK_GATEWAY=<%= node[:devstack][:gateway_ip] %>
 
-disable_service n-net
-enable_service q-svc
-enable_service q-agt
-enable_service q-dhcp
-enable_service q-meta
-enable_service q-l3
+<% node[:devstack][:disabled_services].each do |service| -%>
+disable_service <%=service%>
+<% end %>
+
+<% node[:devstack][:enabled_services].each do |service| -%>
+enable_service <%=service%>
+<% end %>
 
 <%= node[:devstack][:localconf] %>
