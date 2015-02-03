@@ -45,9 +45,15 @@ execute "killall screen || true"
 
 execute "su -c 'set -e; cd #{node[:devstack][:dir]}/devstack; RECLONE=yes bash stack.sh > devstack.log' #{node[:devstack][:user]}"
 
+if node[:devstack][:host_ip] == node[:devstack][:service_host]
+  bridge = 'br-ex'
+else
+  bridge = 'br-int'
+end
+
 execute "add #{node[:devstack][:public_interface]} to bridge" do
-  command "sudo ovs-vsctl add-port br-ex #{node[:devstack][:public_interface]}"
-  not_if do "sudo ovs-vsctl list-ports br-ex | grep #{node[:devstack][:public_interface]}" end
+  command "sudo ovs-vsctl add-port #{bridge} #{node[:devstack][:public_interface]}"
+  not_if do "sudo ovs-vsctl list-ports #{bridge} | grep #{node[:devstack][:public_interface]}" end
 end
 
 execute "sudo ip addr del #{node[:devstack][:vm_net_ip]} dev #{node[:devstack][:public_interface]}"
