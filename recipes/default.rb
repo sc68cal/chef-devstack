@@ -52,8 +52,7 @@ else
 end
 
 execute "add #{node[:devstack][:public_interface]} to bridge" do
-  command "sudo ovs-vsctl add-port #{bridge} #{node[:devstack][:public_interface]}"
-  not_if do "sudo ovs-vsctl list-ports #{bridge} | grep #{node[:devstack][:public_interface]}" end
+  command "sudo ovs-vsctl add-port --may-exist #{bridge} #{node[:devstack][:public_interface]}"
 end
 
 execute "sudo ip addr del #{node[:devstack][:vm_net_ip]} dev #{node[:devstack][:public_interface]}"
