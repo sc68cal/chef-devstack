@@ -47,12 +47,15 @@ execute "su -c 'set -e; cd #{node[:devstack][:dir]}/devstack; RECLONE=yes bash s
 
 if node[:devstack][:host_ip] == node[:devstack][:service_host]
   bridge = 'br-ex'
+  interface = node[:devstack][:public_interface]
 else
   bridge = 'br-int'
+  interface = node[:devstack][:tenant_data_interface]
 end
 
 execute "add #{node[:devstack][:public_interface]} to bridge" do
-  command "sudo ovs-vsctl add-port --may-exist #{bridge} #{node[:devstack][:public_interface]}"
+  command "sudo ovs-vsctl --may-exist add-port #{bridge} #{interface}"
 end
 
 execute "sudo ip addr del #{node[:devstack][:vm_net_ip]} dev #{node[:devstack][:public_interface]}"
+execute "sudo ip addr del #{node[:devstack][:tenant_data_ip]} dev #{node[:devstack][:tenant_data_interface]}"
