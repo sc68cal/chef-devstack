@@ -21,19 +21,6 @@ include_recipe "apt"
 
 package "git"
 
-execute "git clone #{node[:devstack][:repository]}" do
-  cwd node[:devstack][:dir]
-  user node[:devstack][:user]
-  group node[:devstack][:group]
-  not_if { File.directory?("#{node[:devstack][:dir]}/devstack") }
-end
-
-execute "git checkout #{node[:devstack][:branch]}" do
-  cwd "#{node[:devstack][:dir]}/devstack"
-  user node[:devstack][:user]
-  group node[:devstack][:group]
-end
-
 template "#{node[:devstack][:dir]}/devstack/local.conf" do
   source "local.conf.erb"
   owner node[:devstack][:user]
@@ -43,4 +30,4 @@ end
 
 execute "killall screen || true"
 
-execute "su -c 'set -e; cd #{node[:devstack][:dir]}/devstack; RECLONE=yes bash stack.sh > devstack.log' #{node[:devstack][:user]}"
+execute "su -c 'set -e; cd #{node[:devstack][:dir]}/devstack; RECLONE=yes bash stack.sh > devstack.log 2>&1' #{node[:devstack][:user]}"
