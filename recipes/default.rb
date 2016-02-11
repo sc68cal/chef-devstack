@@ -26,6 +26,7 @@ template "#{node[:devstack][:dir]}/devstack/local.conf" do
   owner node[:devstack][:user]
   group node[:devstack][:group]
   mode 0644
+  action :create_if_missing
 end
 
 execute "killall screen || true"
